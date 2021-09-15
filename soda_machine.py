@@ -48,7 +48,7 @@ class SodaMachine:
 
     def calculate_transaction(self, customer_payment, selected_soda, customer):
         total_payment_value = self.calculate_coin_value(customer_payment)
-        if total_payment_value < selected_soda.price:
+        if total_payment_value > selected_soda.price:
             change_value = self.determine_change_value(total_payment_value, selected_soda.price)
             customer_change = self.gather_change_from_register(change_value)
             if customer_change is None:
@@ -111,7 +111,7 @@ class SodaMachine:
 
     def determine_change_value(self, total_payment, selected_soda_price):
         """Determines amount of change needed by finding difference of payment amount and can price"""
-        return round(selected_soda_price - total_payment, 2)
+        return round(total_payment - selected_soda_price, 2)
 
     def calculate_coin_value(self, coin_list):
         """Takes in a list of coins, returns the monetary value of list."""
