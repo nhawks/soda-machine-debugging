@@ -1,12 +1,13 @@
 import coins
 
+
 class Wallet:
     def __init__(self):
         self.money = []
         self.fill_wallet()
 
 
-    # """Method will fill wallet's money list with certain amount of each type of coin when called."""
+    #Method will fill wallet's money list with certain amount of each type of coin when called.
     def fill_wallet(self):
         for index in range(8):
             self.money.append(coins.Quarter())
