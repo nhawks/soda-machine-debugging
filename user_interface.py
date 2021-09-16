@@ -1,5 +1,4 @@
 import os
-from wallet import Wallet
 
 
 def simulation_main_menu():
