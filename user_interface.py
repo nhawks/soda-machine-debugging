@@ -28,21 +28,27 @@ def validate_main_menu(user_input):
 
 def display_customer_wallet_info(coins_list, total_value):
     """Takes in a list of ints to display number of coins along with total value of coins."""
-    print(f'You have {coins_list[0]} Quarters')
-    print(f'You have {coins_list[1]} Dimes')
-    print(f'You have {coins_list[2]} Nickels')
-    print(f'You have {coins_list[3]} Pennies')
+    print(f"You have {coins_list[0]} Quarters")
+    print(f"You have {coins_list[1]} Dimes")
+    print(f"You have {coins_list[2]} Nickels")
+    print(f"You have {coins_list[3]} Pennies")
     print(f"Your wallet's total value is ${total_value}")
 
 
 def display_welcome():
     """Initial method asking user if they'll make a purchase. No errors."""
-    print("\nWelcome to the soda machine.  We only take coins as payment. \n")
-    user_response = continue_prompt("Would you like to make a purchase? (y/n):")
+    print(
+        "\nWelcome to the soda machine.  We only take coins as payment. \n"
+    )
+    user_response = continue_prompt(
+        "Would you like to make a purchase? (y/n):"
+    )
     if user_response:
         return True
     else:
-        print("Please step aside to allow another customer to make a selection")
+        print(
+            "Please step aside to allow another customer to make a selection"
+        )
         return False
 
 
@@ -53,21 +59,18 @@ def output_text(text):
 
 def clear_console():
     """Used for clearing out the console. No errors."""
-    os.system('cls' if os.name == 'nt' else "clear")
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def continue_prompt(text):
     """Validates a 'y' or 'yes' string and returns a True value. No errors."""
-    switcher = {
-        "y": True,
-        "yes": True
-    }
+    switcher = {"y": True, "yes": True}
     user_input = input(text).lower()
     return switcher.get(user_input, False)
 
 
 def soda_selection(inventory):
-    """Displays purchasable soda inventory and """
+    """Displays purchasable soda inventory and"""
     validated_user_selection = (False, None)
     soda_options = get_unique_can_names(inventory)
     while validated_user_selection[0] is False:
@@ -77,7 +80,9 @@ def soda_selection(inventory):
             print(f"\n\tEnter -{i}- for {can.name} : ${can.price}")
             i += 1
         user_selection = try_parse_int(input("Selection:"))
-        validated_user_selection = validate_coin_choice(user_selection, soda_options)
+        validated_user_selection = validate_coin_choice(
+            user_selection, soda_options
+        )
     return validated_user_selection[1]
 
 
@@ -113,7 +118,9 @@ def get_unique_can_names(inventory):
 
 def display_can_cost(selected_can):
     """Displays the name of a can and its price"""
-    print(f'The price of a {selected_can.name} is ${selected_can.price}')
+    print(
+        f"The price of a {selected_can.name} is ${selected_can.price}"
+    )
 
 
 def display_payment_value(customer_payment):
@@ -122,7 +129,7 @@ def display_payment_value(customer_payment):
     for coin in customer_payment:
         total_payment_value += coin.value
     total_payment_value = round(total_payment_value, 2)
-    print(f'You currently have ${total_payment_value} in hand')
+    print(f"You currently have ${total_payment_value} in hand")
 
 
 def coin_selection():
@@ -133,7 +140,9 @@ def coin_selection():
         print("\tEnter -2- for Dime")
         print("\tEnter -3- for Nickel")
         print("\tEnter -4- for Penny")
-        print("\tEnter -5- for when finished to deposit payment into machine")
+        print(
+            "\tEnter -5- for when finished to deposit payment into machine"
+        )
         user_input = try_parse_int(input())
         validated_user_selection = validate_coin_selection(user_input)
         if validated_user_selection[0] is False:
@@ -148,13 +157,13 @@ def validate_coin_selection(selection):
         2: (True, "Dime"),
         3: (True, "Nickel"),
         4: (True, "Penny"),
-        5: (True, "Done")
+        5: (True, "Done"),
     }
     return switcher.get(selection, (False, None))
 
 
 def end_message(soda_name, change_amount):
     """Closing message displaying name of soda purchased and amount of change returned"""
-    print(f'Enjoy your {soda_name.name}')
+    print(f"Enjoy your {soda_name.name}")
     if change_amount >= 0:
-        print(f'Dispensing ${change_amount}')
+        print(f"Dispensing ${change_amount}")
